@@ -4,6 +4,8 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -11,40 +13,73 @@
 
   <body>
     <header>
-    <% if user_signed_in? %>
-     <li>
-       <%=link_to "Home", user_path(current_user.id) %>
-     </li>
-     <li>
-       <%=link_to"User", users_path %>
-     </li>
-     <li><%= link_to"Books",books_path%>
-     </li>
-      <li>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%=link_to 'Home', root_path %>
-      </li>
-      <li>
-        <%= link_to 'about', about_path %>
-      </li>
-      <li>
-        <%= link_to "Sign up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "Log in", new_user_session_path %>
-      </li>
-    <% end %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+      <a class="navbar-brand" href="/"><span>Bookers</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse show" id="navbarNavDropdown" style>
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li><%= link_to  user_path(current_user.id),class: "nav-link text-light" do %>
+                  <i class="fas fa-home " aria-hidden="true">Home</i>
+                <%end%>
+            </li>
+            <li><%= link_to  users_path, class: 'nav-link text-light' do %>
+                  <i class="fas fa-users" aria-hidden="true">Users</i>
+                <%end%>
+            </li>
+            <li><%= link_to books_path, class: 'nav-link text-light' do %>
+                  <i class="fas fa-book-open" aria-hidden="true">Books</i>
+                <%end%>
+            </li>
+            <li><%= link_to  destroy_user_session_path, method: :delete,class: 'nav-link text-light' do%>
+                  <i class="fa fa-sign-out-alt" aria-hidden="true">Log out</i>
+                <%end%>
+            </li>
+            <% else %>
+            <li><%= link_to  top_path ,class: 'nav-link text-light' do%>
+                  <i class="fas fa-home " aria-hidden="true">Home</i>
+                <%end%>
+            </li>
+            <li><%= link_to  about_path ,class: 'nav-link text-light' do%>
+                  <i class="fas fa-link" aria-hidden="true">About</i>
+                <%end%>
+            </li>
+            <li><%= link_to  new_user_registration_path, class: 'nav-link text-light' do%>
+                  <i class="fas fa-user-plus" aria-hidden="true">Sign up</i>
+                <%end%>
+            </li>
+            <li><%= link_to  new_user_session_path ,class: 'nav-link text-light' %>
+                  <i class="fas fa-sign-out-alt" aria-hidden="true">Log in</i>
+                <% end %>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </nav>
     </header>
 
     <main>
-    <%= yield %>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+
+
+          <%= yield %>
+
     </main>
 
     <footer>
-      <p>CopyRight Infratop.inc</p>
+
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+             <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
     </footer>
 
   </body>

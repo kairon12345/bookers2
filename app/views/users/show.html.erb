@@ -1,64 +1,19 @@
-<div>
-  <h2>User info</h2>
+<% if flash[:update] %>
+  <%= flash[:update] %>
+<% end %>
 
-  <%=attachment_image_tag @user,:profile_image ,fillback: "no_image.jpg"%>
+<div class="container px-5 px-sm-0">
+  <div class="row">
 
-  <table>
-    <tbody>
-      <tr>
-        <th>name</th>
-        <th><%= @user.name %></th>
-      </tr>
-      <tr>
-        <th>introduction</th>
-        <th><%= @user.introduction %></th>
-      </tr>
-    </tbody>
-  </table>
+    <div class="col-md-3">
+      <%=  render 'users/info',user: @user %>
+      <%= render 'books/list', book: @book %>
+    </div>
 
-<% if @user.id == current_user.id %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-  <% end %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <%= render 'books/lists', books: @books %>
+    </div>
+
+  </div>
 </div>
-
-<div>
-<h1>New Book</h1>
-
-<%= form_with model:@book ,local:true do |f| %>
-
-  <h4>Title</h4>
-  <%=f.text_field :title %>
-
-  <h4>Opinion</h4>
-  <%=f.text_field :body %>
-
-  <%=f.submit'Create Book'%>
-
-<%end%>
-
-</div>
-
-
-<%= @books.each do |books| %>
-<div>
-  <h2>Books</h2>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Title</th>
-        <th>Opinion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td><%=attachment_image_tag books.user,:profile_image, fallback: "no_image.jpg" %></td>
-          <td><%=books.title%></td>
-          <td><%=books.body%></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<%end%>
-
-<%= paginate @books %>
