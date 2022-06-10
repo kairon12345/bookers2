@@ -1,10 +1,5 @@
 
 
-<% if flash[:update] %>
-<div>
-  <%= flash[:update] %>
-</div>
-<%end%>
 
 <div class="container">
   <div class="row">
@@ -28,12 +23,12 @@
               <%end%>
         </td>
         <td><%=@book.body%></td>
-        <%if @book.user==current_user%>
+        <%if @book.user==current_user %>
           <td>
             <%=link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %>
           </td>
           <td>
-            <%=link_to 'destroy',book_path(@book),method: :delete, data: {confirm: "本当に消しますか"} ,class: "btn btn-sm btn-danger" %>
+            <%=link_to 'Destroy',book_path(@book),method: :delete, data: {confirm: "本当に消しますか"} ,class: "btn btn-sm btn-danger" %>
           </td>
         <%end%>
       </tr>

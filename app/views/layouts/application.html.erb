@@ -15,7 +15,11 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-      <a class="navbar-brand" href="/"><span>Bookers</span></a>
+
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <span>Bookers</span>
+      <%end%>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,11 +43,11 @@
                 <%end%>
             </li>
             <% else %>
-            <li><%= link_to  top_path ,class: 'nav-link text-light' do%>
+            <li><%= link_to  root_path ,class: 'nav-link text-light' do%>
                   <i class="fas fa-home " aria-hidden="true">Home</i>
                 <%end%>
             </li>
-            <li><%= link_to  about_path ,class: 'nav-link text-light' do%>
+            <li><%= link_to  home_about_path ,class: 'nav-link text-light' do%>
                   <i class="fas fa-link" aria-hidden="true">About</i>
                 <%end%>
             </li>
@@ -51,10 +55,11 @@
                   <i class="fas fa-user-plus" aria-hidden="true">Sign up</i>
                 <%end%>
             </li>
-            <li><%= link_to  new_user_session_path ,class: 'nav-link text-light' %>
+            <li><%= link_to  new_user_session_path , class: 'nav-link text-light' do %>
                   <i class="fas fa-sign-out-alt" aria-hidden="true">Log in</i>
-                <% end %>
+                <%end%>
             </li>
+            <%end%>
           </ul>
         </div>
         </div>
